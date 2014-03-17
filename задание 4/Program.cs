@@ -31,7 +31,7 @@ namespace ConsoleApplication3
             timestart = DateTime.Now; 
             timefinish = DateTime.Now;
 
-            for (int i = 0; i < number; i++)
+            for (int i = 0; i < number; i++)//Цикл заполнения Лошадиные хуи
             {
                 rarray[i] = rand.Next(-2147483648, 2147483647);
                 timefinish = DateTime.Now;
