@@ -12,25 +12,38 @@ namespace ConsoleApplication3
         {
             Console.WriteLine("Введите количество чисел");
             uint number;
+            Random rand = new Random(); 
+            DateTime timestart;
+            DateTime timefinish;
+            double alltime;
 
+
+            
             if (!uint.TryParse(Console.ReadLine(), out number))
             {
                 Console.WriteLine("Ошибка при вводе числа.Нажмите Enter для выхода");
                 Console.ReadLine();
                 Environment.Exit(0);
             }
-            Random rand = new Random();
+            //размерность массива узнаём только после ввода number
             int[] rarray = new int[number];
 
-            DateTime timestart = DateTime.Now;
-            
+            timestart = DateTime.Now; 
+            timefinish = DateTime.Now;
+
             for (int i = 0; i < number; i++)
             {
                 rarray[i] = rand.Next(-2147483648, 2147483647);
+                timefinish = DateTime.Now;
+                //если генерация занимает больше 5 секунд - завершаем её
+                if (5 < ((timefinish.Ticks - timestart.Ticks) * 1E-7))
+                {
+                    break;
+                }
             }
-            DateTime timefinish = DateTime.Now;
+            
 
-            double alltime = (timefinish.Ticks - timestart.Ticks) * 1E-7;
+            alltime = (timefinish.Ticks - timestart.Ticks) * 1E-7;
             
             if (alltime > 5) { Console.WriteLine("Превышено допустимое время работы программы, введите количество поменьше"); }
             if (alltime < 1E-7) { Console.WriteLine("Генерация заняла меньше наносекунды"); }
